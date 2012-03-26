@@ -1,0 +1,139 @@
+" <MainConfig> {
+  " Enable line number
+  set number
+  " Highlight searches
+  set hlsearch
+  " Hide buffers
+  set hidden
+  " Turn on syntax highlighting
+  syn on
+  " Autoindent new lines
+  set autoindent
+  " Use spaces instead of tabs
+  set expandtab
+  " Set tabs to 2 whitespaces
+  set tabstop=2
+  " 2
+  set shiftwidth=2
+  " 2 space tabs
+  set softtabstop=2
+  " Enable mouse support
+  set mouse=a
+  " Set the title of the current file as xterm title
+  set title
+  " Set history to 1000
+  set history=100
+  " Find as you type
+  set incsearch
+  " Case insensitive search
+  set ignorecase
+  " Match case only when a capital is used
+  set smartcase
+  " UTF8 Encoding
+  scriptencoding utf-8
+  " Map leader to ,
+  let mapleader = ","
+" } </Main config>
+
+
+" <Commands> {
+  " This command based on VimTip483 uses <cword> to get the word under the cursor, but also uses % to limit the search to the current file only
+  command GREP :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
+  command Dark :set background=dark
+  command Light :set background=light
+  command W :w
+  nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<cr>
+
+  " Finally, this cabbrev uses CTRL-R CTRL-W to get the word under the cursor, limiting the search to files of the same type using expand("%:e")
+  cabbrev lvim
+        \ lvim /\<lt><C-R><C-W>\>/gj
+        \ **/*<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
+        \ <Bar> lw
+        \ <C-Left><C-Left><C-Left>
+" } </Commands>
+
+
+" <KeyBindings> {
+  " Map NerdTree to <leader> .
+  map <Leader>. :NERDTreeToggle<CR>
+  " Window switching
+  map <C-h> <C-w>h
+  map <C-j> <C-w>j
+  map <C-k> <C-w>k
+  map <C-l> <C-w>l
+  " Window splitting
+  map <C-\> :vsp<CR>
+  map <C-_> :sp<CR>
+  " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
+  map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+  if has("gui_running")
+    map <D-u> :Gist<CR>
+    map <D-C> :ColorHEX<CR>
+  endif
+
+  nnoremap <F5> :GundoToggle<CR>
+  noremap <Leader><Leader> <C-^>
+  inoremap jj <ESC>
+" } </KeyBindings>
+
+
+if has("autocmd")
+  autocmd BufNewFile,BufRead Rakefile,Capfile,Gemfile,Guardfile,config.ru setfiletype ruby
+  autocmd BufNewFile,BufRead *.styl setfiletype sass
+  autocmd BufNewFile,BufRead *.jade setfiletype haml
+  " Automatically delete fugitive buffers
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+  autocmd BufNewFile,BufRead *.hamljs setfiletype haml
+
+  autocmd User fugitive
+    \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+    \   nnoremap <buffer> .. :edit %:h<CR> |
+    \ endif
+
+endif
+
+" Show branch in vim
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+set laststatus=2
+
+
+if has("gui_running")
+  " Get rid of annoying balloon error popups about ri -f simple. I don't care
+  " about hovers anyway
+  autocmd FileType ruby,eruby set noballooneval
+else
+  set background=dark
+  let g:solarized_termcolors=256
+  set t_Co=256
+  set cursorline
+  color molokai
+endif
+
+" Enable the wild menu on tab in ex mode
+set wildchar=<Tab> wildmenu wildmode=full
+
+" Autosafe on focus lost, ignore warnings for new files
+au FocusLost * silent! wall
+
+" Signs
+sign define fixme text=!! linehl=Todo texthl=Error icon=/path/to/todo.xpm
+function! SignFixme(linenumber)
+  execute(":sign place ".a:linenumber." line=".a:linenumber." name=fixme file=".expand("%:p"))
+endfunction
+
+function! Mark()
+  execute(":call SignFixme(".line(".").")")
+endfunction
+
+map mm :call Mark()<CR>
+" TODO
+function! AutoFixme() range
+  for n in range(a:firstline, a:lastline)
+    if getline(n) =~ '\TODO'
+      echo "Found"
+      execute(":call SignFixme(".n.")")
+    endif
+  endfor
+endfunction
+
