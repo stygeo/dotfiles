@@ -8,19 +8,19 @@ fi
 
 mkdir -p "$BACKUPDIR"/r/
 
-if [ -f $HOME/.pryrc ]; then
+if [ $HOME/.pryrc ]; then
   mv ~/.pryrc $BACKUPDIR/pryrc
 fi
 
-if [ -f $HOME/.vimrc.after ]; then
+if [ $HOME/.vimrc.after ]; then
   mv ~/.vimrc.after $BACKUPDIR/vimrc.after
 fi
 
-if [ -f $HOME/.zsh_aliases ]; then
+if [ $HOME/.zsh_aliases ]; then
   mv ~/.zsh_aliases $BACKUPDIR/zsh_aliases
 fi
 
-if [ -f $HOME/.zshrc ]; then
+if [ $HOME/.zshrc ]; then
   mv ~/.zshrc $BACKUPDIR/zshrc
 fi
 
