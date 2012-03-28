@@ -1,81 +1,98 @@
-" <MainConfig> {
-  " Enable line number
-  set number
-  " Highlight searches
-  set hlsearch
-  " Hide buffers
-  set hidden
-  " Turn on syntax highlighting
-  syn on
-  " Autoindent new lines
-  set autoindent
-  " Use spaces instead of tabs
-  set expandtab
-  " Set tabs to 2 whitespaces
-  set tabstop=2
-  " 2
-  set shiftwidth=2
-  " 2 space tabs
-  set softtabstop=2
-  " Enable mouse support
-  set mouse=a
-  " Set the title of the current file as xterm title
-  set title
-  " Set history to 1000
-  set history=100
-  " Find as you type
-  set incsearch
-  " Case insensitive search
-  set ignorecase
-  " Match case only when a capital is used
-  set smartcase
-  " UTF8 Encoding
-  scriptencoding utf-8
-  " Map leader to ,
-  let mapleader = ","
-" } </Main config>
+"<MainConfig> {
+    syn on                          " Turn on syntax highlighting
+    set number                      " Enable line number
+    set hidden                      " Hide buffers
+
+    "==================== Colors ======================================
+
+    set background=dark             " Set background to dark
+    let g:solarized_termcolors=256  " Set solarized console to 256 colors
+    set t_Co=256                    " Set vim to 256 colors
+    color solarized                 " Color schema
+
+    "==================== Status line =================================
+
+    set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+    set laststatus=2
+
+    "===================== Spelling ===================================
+
+    set spell
+    set spelllang=en
+
+    "===================== Cursor =====================================
+
+    set cursorcolumn                " Column marker
+    set cursorline
+
+    "===================== Indentation ================================
+
+    set autoindent                  " Autoindent new lines
+    set expandtab                   " Use spaces instead of tabs
+    set tabstop=2                   " Set tabs to 2 whitespaces
+    set shiftwidth=2                " 2
+    set softtabstop=2               " 2 space tabs
+    set mouse=a                     " Enable mouse support
+    set title                       " Set the title of the current file as xterm title
+
+    "==================== History =====================================
+
+    set history=100                 " Set history to 1000
+    set undofile
+
+    "==================== Search ======================================
+
+    set incsearch                   " Find as you type
+    set ignorecase                  " Case insensitive search
+    set smartcase                   " Match case only when a capital is used
+    set hlsearch                    " Highlight searches
+
+    "==================== Misc ========================================
+
+    scriptencoding utf-8            " UTF8 Encoding
+    let mapleader = ","             " Map leader to
+"} </Main config>
+
+"<Commands> {
+    " This command based on VimTip483 uses <cword> to get the word under the cursor, but also uses % to limit the search to the current file only
+    command GREP :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
+    command Dark :set background=dark
+    command Light :set background=light
+    command W :w
+    nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<cr>
+
+    " Finally, this cabbrev uses CTRL-R CTRL-W to get the word under the cursor, limiting the search to files of the same type using expand("%:e")
+    cabbrev lvim
+          \ lvim /\<lt><C-R><C-W>\>/gj
+          \ **/*<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
+          \ <Bar> lw
+          \ <C-Left><C-Left><C-Left>
+"} </Commands>
 
 
-" <Commands> {
-  " This command based on VimTip483 uses <cword> to get the word under the cursor, but also uses % to limit the search to the current file only
-  command GREP :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
-  command Dark :set background=dark
-  command Light :set background=light
-  command W :w
-  nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<cr>
+"<KeyBindings> {
+    " Map NerdTree to <leader> .
+    map <Leader>. :NERDTreeToggle<CR>
+    " Window switching
+    map <C-h> <C-w>h
+    map <C-j> <C-w>j
+    map <C-k> <C-w>k
+    map <C-l> <C-w>l
+    " Window splitting
+    map <C-\> :vsp<CR>
+    map <C-_> :sp<CR>
+    " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
+    map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 
-  " Finally, this cabbrev uses CTRL-R CTRL-W to get the word under the cursor, limiting the search to files of the same type using expand("%:e")
-  cabbrev lvim
-        \ lvim /\<lt><C-R><C-W>\>/gj
-        \ **/*<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
-        \ <Bar> lw
-        \ <C-Left><C-Left><C-Left>
-" } </Commands>
+    if has("gui_running")
+      map <D-u> :Gist<CR>
+      map <D-C> :ColorHEX<CR>
+    endif
 
-
-" <KeyBindings> {
-  " Map NerdTree to <leader> .
-  map <Leader>. :NERDTreeToggle<CR>
-  " Window switching
-  map <C-h> <C-w>h
-  map <C-j> <C-w>j
-  map <C-k> <C-w>k
-  map <C-l> <C-w>l
-  " Window splitting
-  map <C-\> :vsp<CR>
-  map <C-_> :sp<CR>
-  " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
-  map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-
-  if has("gui_running")
-    map <D-u> :Gist<CR>
-    map <D-C> :ColorHEX<CR>
-  endif
-
-  nnoremap <F5> :GundoToggle<CR>
-  noremap <Leader><Leader> <C-^>
-  inoremap jj <ESC>
-" } </KeyBindings>
+    nnoremap <F5> :GundoToggle<CR>
+    noremap <Leader><Leader> <C-^>
+    inoremap jj <ESC>
+"} </KeyBindings>
 
 
 if has("autocmd")
@@ -93,21 +110,12 @@ if has("autocmd")
 
 endif
 
-" Show branch in vim
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-set laststatus=2
-
 
 if has("gui_running")
   " Get rid of annoying balloon error popups about ri -f simple. I don't care
   " about hovers anyway
   autocmd FileType ruby,eruby set noballooneval
 else
-  set background=dark
-  let g:solarized_termcolors=256
-  set t_Co=256
-  set cursorline
-  color molokai
 endif
 
 " Enable the wild menu on tab in ex mode
