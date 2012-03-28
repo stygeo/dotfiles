@@ -39,7 +39,7 @@
 
     set history=100                 " Set history to 1000
     set undofile
-
+    set dir=~/.vimswap//,/var/tmp//,/tmp//,. " Store swap files in fixed location, not current directory.
     "==================== Search ======================================
 
     set incsearch                   " Find as you type
