@@ -82,14 +82,13 @@
     map <C-\> :vsp<CR>
     map <C-_> :sp<CR>
     " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
-    map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+    map <F9> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 
     if has("gui_running")
       map <D-u> :Gist<CR>
       map <D-C> :ColorHEX<CR>
     endif
 
-    nnoremap <F5> :GundoToggle<CR>
     noremap <Leader><Leader> <C-^>
     inoremap jj <ESC>
 "} </KeyBindings>
