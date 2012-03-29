@@ -24,9 +24,14 @@ if [ $HOME/.zshrc ]; then
   mv ~/.zshrc $BACKUPDIR/zshrc
 fi
 
-ln -s $PWD/pryrc ~/.pryrc
-ln -s $PWD/vimrc.after ~/.vimrc.after
-ln -s $PWD/zsh_aliases ~/.zsh_aliases
-ln -s $PWD/zshrc ~/.zshrc
+if [[ $HOME/.oh-my-zsh && $HOME/.oh-my-zsh/themes/stygeo.zsh-theme ]]; then
+  rm $HOME/.oh-my-zsh/themes/stygeo.zsh-theme
+fi
+
+ln -s $PWD/pryrc $HOME/.pryrc
+ln -s $PWD/vimrc.after $HOME/.vimrc.after
+ln -s $PWD/zsh_aliases $HOME/.zsh_aliases
+ln -s $PWD/zshrc $HOME/.zshrc
+ln -s $PWD/stygeo.zsh-theme $HOME/.oh-my-zsh/themes/stygeo.zsh-theme
 
 echo "Link gitconfig manually and add your [github] profile settings"
