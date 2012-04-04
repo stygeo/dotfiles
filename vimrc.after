@@ -2,7 +2,8 @@
     syn on                          " Turn on syntax highlighting
     set number                      " Enable line number
     set hidden                      " Hide buffers
-
+    set autoread                    " Autoread file if changed outside VIM (Only when the file hasn't changed locally)
+    set grepprg=ack               " Set Ack instead of grep
     "==================== Colors ======================================
 
     set background=dark             " Set background to dark
@@ -34,6 +35,7 @@
     set softtabstop=2               " 2 space tabs
     set mouse=a                     " Enable mouse support
     set title                       " Set the title of the current file as xterm title
+    set shiftround                  " When at 3 spaces indent to 4 instead of 5
 
     "==================== History =====================================
 
@@ -53,6 +55,40 @@
     let mapleader = ","             " Map leader to
 "} </Main config>
 
+"<KeyBindings> {
+    " Map NerdTree to <leader> .
+    map <silent> <Leader>. :silent NERDTreeToggle<CR>
+    map <Leader>b :BufferGatorToggle<CR>
+    " Window switching
+    map <C-h> <C-w>h
+    map <C-j> <C-w>j
+    map <C-k> <C-w>k
+    map <C-l> <C-w>l
+    " Window splitting
+    map <C-\> :vsp<CR>
+    map <C-_> :sp<CR>
+    map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+    map <Leader>s :sp <C-R>=expand("%:p:h") . '/'<CR>
+    map <Leader>vs :vsp <C-R>=expand("%:p:h") . '/'<CR>
+    " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
+    map <F9> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+    noremap <Leader><Leader> <C-^>
+    inoremap jj <ESC>
+
+    map Q <Nop>                     " Disable Ex mode
+    map K <Nop>                     " Disable `man WORD`
+    map N Nzz                       " Center cursor when searching backwards
+    map n nzz                       " Center cursor when searching
+
+
+    " ================== GUI ONLY =====================================
+    if has("gui_running")
+      map <D-u> :Gist<CR>
+      map <D-C> :ColorHEX<CR>
+    endif
+"} </KeyBindings>
+
 "<Commands> {
     " This command based on VimTip483 uses <cword> to get the word under the cursor, but also uses % to limit the search to the current file only
     command GREP :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
@@ -68,31 +104,6 @@
           \ <Bar> lw
           \ <C-Left><C-Left><C-Left>
 "} </Commands>
-
-
-"<KeyBindings> {
-    " Map NerdTree to <leader> .
-    map <Leader>. :NERDTreeToggle<CR>
-    " Window switching
-    map <C-h> <C-w>h
-    map <C-j> <C-w>j
-    map <C-k> <C-w>k
-    map <C-l> <C-w>l
-    " Window splitting
-    map <C-\> :vsp<CR>
-    map <C-_> :sp<CR>
-    " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
-    map <F9> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-
-    if has("gui_running")
-      map <D-u> :Gist<CR>
-      map <D-C> :ColorHEX<CR>
-    endif
-
-    noremap <Leader><Leader> <C-^>
-    inoremap jj <ESC>
-"} </KeyBindings>
-
 
 if has("autocmd")
   autocmd BufNewFile,BufRead Rakefile,Capfile,Gemfile,Guardfile,config.ru setfiletype ruby
