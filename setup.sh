@@ -1,3 +1,5 @@
+#! /bin/sh
+
 DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BACKUPDIR="$HOME/dotfiles.backup"
 
@@ -8,7 +10,6 @@ if [ -d $BACKUPDIR ]; then
 fi
 
 mkdir -p "$BACKUPDIR"/r/
-
 
 dotfiles=(pryrc vimrc.after vimrc.before zsh_aliases zshrc zlogin gitconfig)
 for file in ${dotfiles[@]}; do
