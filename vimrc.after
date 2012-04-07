@@ -78,8 +78,6 @@
 
     map Q <Nop>                     " Disable Ex mode
     map K <Nop>                     " Disable `man WORD`
-    map N Nzz                       " Center cursor when searching backwards
-    map n nzz                       " Center cursor when searching
 
 
     " ================== GUI ONLY =====================================
