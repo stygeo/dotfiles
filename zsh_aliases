@@ -1,3 +1,5 @@
 alias ss="rails s"
 alias prys="pry -r ./config/environment"
 alias less="less -R"
+alias cdcpu="/Users/stygeo/dev/llvm-dcpu16/cbuild/bin/clang -ccc-host-triple dcpu16 -S "
+alias notes="vim -c \"nmap N G2o# \" ~/notes.md"
