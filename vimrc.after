@@ -4,6 +4,9 @@
     set hidden                      " Hide buffers
     set autoread                    " Autoread file if changed outside VIM (Only when the file hasn't changed locally)
     set grepprg=ack               " Set Ack instead of grep
+
+    set wildchar=<Tab> wildmenu wildmode=full " Enable the wild menu on tab in ex mode
+
     "==================== Colors ======================================
 
     set background=dark             " Set background to dark
@@ -52,35 +55,50 @@
     "==================== Misc ========================================
 
     scriptencoding utf-8            " UTF8 Encoding
+    "let g:syntastic_auto_loc_list=1 " Auto open syntastic error window
     let mapleader = ","             " Map leader to
 "} </Main config>
 
 "<KeyBindings> {
-    " Map NerdTree to <leader> .
-    map <silent> <Leader>. :silent NERDTreeToggle<CR>
-    map <Leader>b :BufferGatorToggle<CR>
-    " Window switching
-    map <C-h> <C-w>h
-    map <C-j> <C-w>j
-    map <C-k> <C-w>k
-    map <C-l> <C-w>l
-    " Window splitting
-    map <C-\> :vsp<CR>
-    map <C-_> :sp<CR>
-    map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
-    map <Leader>s :sp <C-R>=expand("%:p:h") . '/'<CR>
-    map <Leader>vs :vsp <C-R>=expand("%:p:h") . '/'<CR>
-    " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
-    map <F9> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-
-    noremap <Leader><Leader> <C-^>
-    inoremap jj <ESC>
+    "==================== Disables ====================================
 
     map Q <Nop>                     " Disable Ex mode
     map K <Nop>                     " Disable `man WORD`
 
+    "==================== Plugins =====================================
+
+    map <silent> <Leader>. :silent NERDTreeToggle<CR>               " Toggle NerdTree
+    map <Leader>b :BuffergatorToggle<CR>                            " Toggle BufferWindow
+
+    "==================== Windows =====================================
+
+    map <C-h> <C-w>h                " Switch to window left
+    map <C-j> <C-w>j                " Switch to window right
+    map <C-k> <C-w>k                " Switch to window above
+    map <C-l> <C-w>l                " Switch to window below
+    map <C-\> :vsp<CR>              " Split window vertical
+    map <C-_> :sp<CR>               " Split window horizontal
+
+    map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>                " Edit <file> in current working dir as current file
+    map <Leader>s :sp <C-R>=expand("%:p:h") . '/'<CR>               " ^ split
+    map <Leader>vs :vsp <C-R>=expand("%:p:h") . '/'<CR>             " ^ vertical split
+
+    "==================== Buffers =====================================
+
+    noremap <Leader><Leader> <C-^>  " Switch to previous buffer
+
+    "==================== Tools ======================================
+    " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
+    map <F9> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+    "==================== Misc =======================================
+
+    nmap . .`[                      " Redo command but leave cursor on current position
+    inoremap jj <ESC>               " Escape with jj
+    nnoremap <silent> <leader>W :silent %s/\s\+$//<cr>:let @/=''<cr> " Remove trailing spaces
 
     " ================== GUI ONLY =====================================
+
     if has("gui_running")
       map <D-u> :Gist<CR>
       map <D-C> :ColorHEX<CR>
@@ -93,7 +111,6 @@
     command Dark :set background=dark
     command Light :set background=light
     command W :w
-    nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<cr>
 
     " Finally, this cabbrev uses CTRL-R CTRL-W to get the word under the cursor, limiting the search to files of the same type using expand("%:e")
     cabbrev lvim
@@ -126,8 +143,6 @@ if has("gui_running")
 else
 endif
 
-" Enable the wild menu on tab in ex mode
-set wildchar=<Tab> wildmenu wildmode=full
 
 " Autosafe on focus lost, ignore warnings for new files
 au FocusLost * silent! wall

@@ -11,7 +11,7 @@ fi
 
 mkdir -p "$BACKUPDIR"/r/
 
-dotfiles=(pryrc vimrc.after vimrc.before zsh_aliases zshrc zlogin gitconfig)
+dotfiles=(pryrc vimrc.after vimrc.before zsh_aliases zshrc zlogin gitconfig tmux.conf)
 for file in ${dotfiles[@]}; do
   if [ $HOME/.$file ]; then
     mv $HOME/.$file $BACKUPDIR/$file

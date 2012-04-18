@@ -8,6 +8,7 @@
 [alias]
 	last = cat-file commit HEAD
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  st = status
 [format]
 	pretty = format:%C(bold yellow)%H%Creset %C(bold cyan)%ci%Creset%n%C(bold green)%an%Creset %C(bold)%s%Creset%n
 [github]
