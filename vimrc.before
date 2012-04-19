@@ -1,1 +1,2 @@
 call janus#disable_plugin("syntastic")
+let g:Powerline_symbols = 'fancy' " Farce bar

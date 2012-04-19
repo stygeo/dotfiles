@@ -9,10 +9,9 @@
 
     "==================== Colors ======================================
 
-    set background=dark             " Set background to dark
     let g:solarized_termcolors=256  " Set solarized console to 256 colors
     set t_Co=256                    " Set vim to 256 colors
-    color solarized                 " Color schema
+    colorscheme solarized           " Color schema
 
     "==================== Status line =================================
 
@@ -86,6 +85,8 @@
     "==================== Buffers =====================================
 
     noremap <Leader><Leader> <C-^>  " Switch to previous buffer
+    noremap <Leader>y "*y           " Yank to OS Clipboard
+    noremap <Leader>Y "*Y           " Yank line to OS Clipboard
 
     "==================== Tools ======================================
     " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
@@ -95,7 +96,7 @@
 
     nmap . .`[                      " Redo command but leave cursor on current position
     inoremap jj <ESC>               " Escape with jj
-    nnoremap <silent> <leader>W :silent %s/\s\+$//<cr>:let @/=''<cr> " Remove trailing spaces
+    nnoremap <leader>W %s/\s\+$//<cr>:let @/=''<cr> " Remove trailing spaces
 
     " ================== GUI ONLY =====================================
 
