@@ -4,7 +4,6 @@
     set hidden                      " Hide buffers
     set autoread                    " Autoread file if changed outside VIM (Only when the file hasn't changed locally)
     set grepprg=ack               " Set Ack instead of grep
-
     set wildchar=<Tab> wildmenu wildmode=full " Enable the wild menu on tab in ex mode
 
     "==================== Colors ======================================
@@ -52,41 +51,51 @@
     set hlsearch                    " Highlight searches
 
     "==================== Misc ========================================
-
-    scriptencoding utf-8            " UTF8 Encoding
-    "let g:syntastic_auto_loc_list=1 " Auto open syntastic error window
-    let mapleader = ","             " Map leader to
-"} </Main config>
-
 "<KeyBindings> {
     "==================== Disables ====================================
 
-    map Q <Nop>                     " Disable Ex mode
-    map K <Nop>                     " Disable `man WORD`
+    " Disable Ex mode
+    map Q <Nop>
+    " Disable `man WORD`
+    map K <Nop>
 
     "==================== Plugins =====================================
 
-    map <silent> <Leader>. :silent NERDTreeToggle<CR>               " Toggle NerdTree
-    map <Leader>b :BuffergatorToggle<CR>                            " Toggle BufferWindow
+    " Toggle NerdTree
+    map <silent> <Leader>. :silent NERDTreeToggle<CR>
+    " Toggle BufferWindow
+    map <Leader>b :BuffergatorToggle<CR>
 
     "==================== Windows =====================================
 
-    map <C-h> <C-w>h                " Switch to window left
-    map <C-j> <C-w>j                " Switch to window right
-    map <C-k> <C-w>k                " Switch to window above
-    map <C-l> <C-w>l                " Switch to window below
-    map <C-\> :vsp<CR>              " Split window vertical
-    map <C-_> :sp<CR>               " Split window horizontal
+    " Switch to window left
+    map <C-h> <C-w>h
+    " Switch to window right
+    map <C-j> <C-w>j
+    " Switch to window above
+    map <C-k> <C-w>k
+    " Switch to window below
+    map <C-l> <C-w>l
+    " Split window vertical
+    map <C-\> :vsp<CR>
+    " Split window horizontal
+    map <C-_> :sp<CR>
 
-    map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>                " Edit <file> in current working dir as current file
-    map <Leader>s :sp <C-R>=expand("%:p:h") . '/'<CR>               " ^ split
-    map <Leader>vs :vsp <C-R>=expand("%:p:h") . '/'<CR>             " ^ vertical split
+    " Edit <file> in current working dir as current file
+    map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+    " ^ split
+    map <Leader>s :sp <C-R>=expand("%:p:h") . '/'<CR>
+    " ^ vertical split
+    map <Leader>vs :vsp <C-R>=expand("%:p:h") . '/'<CR>
 
     "==================== Buffers =====================================
 
-    noremap <Leader><Leader> <C-^>  " Switch to previous buffer
-    noremap <Leader>y "*y           " Yank to OS Clipboard
-    noremap <Leader>Y "*Y           " Yank line to OS Clipboard
+    " Switch to previous buffer
+    noremap <Leader><Leader> <C-^>
+    " Yank to OS Clipboard
+    noremap <Leader>y "*y
+    " Yank line to OS Clipboard
+    noremap <Leader>Y "*Y
 
     "==================== Tools ======================================
     " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
@@ -94,9 +103,12 @@
 
     "==================== Misc =======================================
 
-    nmap . .`[                      " Redo command but leave cursor on current position
-    inoremap jj <ESC>               " Escape with jj
-    nnoremap <leader>W %s/\s\+$//<cr>:let @/=''<cr> " Remove trailing spaces
+    " Redo command but leave cursor on current position
+    nmap . .`[
+    " Escape with jj
+    inoremap jj <ESC>
+    " Remove trailing spaces
+    nnoremap <leader>W %s/\s\+$//<cr>:let @/=''<cr>
 
     " ================== GUI ONLY =====================================
 
