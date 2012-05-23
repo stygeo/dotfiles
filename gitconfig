@@ -15,7 +15,6 @@
 [github]
   username = stygeo
 	user = stygeo
-  password = 0521jw
 [diff]
 	tool = vimdiff
 [difftool]
