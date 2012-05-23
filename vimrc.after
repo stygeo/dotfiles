@@ -1,4 +1,4 @@
-"<MainConfig> {
+"########################## Main config ################################
     syn on                          " Turn on syntax highlighting
     set number                      " Enable line number
     set hidden                      " Hide buffers
@@ -51,7 +51,9 @@
     set hlsearch                    " Highlight searches
 
     "==================== Misc ========================================
-"<KeyBindings> {
+
+"########################## KEY BINDINGS ###################################
+
     "==================== Disables ====================================
 
     " Disable Ex mode
@@ -116,9 +118,9 @@
       map <D-u> :Gist<CR>
       map <D-C> :ColorHEX<CR>
     endif
-"} </KeyBindings>
 
-"<Commands> {
+"########################### COMMANDS "####################################
+
     " This command based on VimTip483 uses <cword> to get the word under the cursor, but also uses % to limit the search to the current file only
     command GREP :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
     command Dark :set background=dark
