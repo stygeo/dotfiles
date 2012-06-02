@@ -5,12 +5,14 @@
     set autoread                    " Autoread file if changed outside VIM (Only when the file hasn't changed locally)
     set grepprg=ack               " Set Ack instead of grep
     set wildchar=<Tab> wildmenu wildmode=full " Enable the wild menu on tab in ex mode
+    let mapleader=","
 
     "==================== Colors ======================================
 
     let g:solarized_termcolors=256  " Set solarized console to 256 colors
     set t_Co=256                    " Set vim to 256 colors
     colorscheme solarized           " Color schema
+    set background=light            " Set light barkground
 
     "==================== Status line =================================
 
@@ -51,6 +53,9 @@
     set hlsearch                    " Highlight searches
 
     "==================== Misc ========================================
+
+    set splitright                  " VSplit on the right instead of the left side
+    set splitbelow                  " Split below instead of top
 
 "########################## KEY BINDINGS ###################################
 
@@ -155,6 +160,7 @@ if has("gui_running")
   " Get rid of annoying balloon error popups about ri -f simple. I don't care
   " about hovers anyway
   autocmd FileType ruby,eruby set noballooneval
+  set guioptions=egmt
 else
 endif
 
