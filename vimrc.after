@@ -55,7 +55,6 @@
     "==================== Misc ========================================
 
     set splitright                  " VSplit on the right instead of the left side
-    set splitbelow                  " Split below instead of top
 
 "########################## KEY BINDINGS ###################################
 
@@ -138,6 +137,10 @@
           \ **/*<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
           \ <Bar> lw
           \ <C-Left><C-Left><C-Left>
+
+    " Scientific calculator
+    command! -nargs=+ Calc :py print <args>
+    py from cmath import *
 "} </Commands>
 
 if has("autocmd")
@@ -164,28 +167,6 @@ if has("gui_running")
 else
 endif
 
-
 " Autosafe on focus lost, ignore warnings for new files
-au FocusLost * silent! wall
-
-" Signs
-sign define fixme text=!! linehl=Todo texthl=Error icon=/path/to/todo.xpm
-function! SignFixme(linenumber)
-  execute(":sign place ".a:linenumber." line=".a:linenumber." name=fixme file=".expand("%:p"))
-endfunction
-
-function! Mark()
-  execute(":call SignFixme(".line(".").")")
-endfunction
-
-map mm :call Mark()<CR>
-" TODO
-function! AutoFixme() range
-  for n in range(a:firstline, a:lastline)
-    if getline(n) =~ '\TODO'
-      echo "Found"
-      execute(":call SignFixme(".n.")")
-    endif
-  endfor
-endfunction
+"au FocusLost * silent! wall
 
