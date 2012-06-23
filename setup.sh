@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BACKUPDIR="$HOME/dotfiles.backup"
@@ -11,8 +11,8 @@ fi
 
 mkdir -p "$BACKUPDIR"/r/
 
-dotfiles=(pryrc vimrc.after vimrc.before zsh_aliases zshrc zlogin gitconfig tmux.conf)
-for file in ${dotfiles[@]}; do
+DOTFILES=( pryrc vimrc.after vimrc.before zsh_aliases zshrc zlogin gitconfig tmux.conf )
+for file in ${DOTFILES[@]}; do
   if [ $HOME/.$file ]; then
     mv $HOME/.$file $BACKUPDIR/$file
     ln -s $DIR/$file $HOME/.$file
