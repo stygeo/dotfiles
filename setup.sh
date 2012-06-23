@@ -25,5 +25,5 @@ if [[ $HOME/.oh-my-zsh && $HOME/.oh-my-zsh/themes/stygeo.zsh-theme ]]; then
 fi
 
 ln -s $DIR/stygeo.zsh-theme $HOME/.oh-my-zsh/themes/stygeo.zsh-theme
-
+ln -s $DIR/awesome.rc.lua $HOME/.config/awesome/rc.lua
 
