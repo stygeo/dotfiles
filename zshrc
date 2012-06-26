@@ -36,5 +36,6 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/sbin
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
+# [[ -s "/home/dev/.rvm/scripts/rvm" ]] && source "/home/dev/.rvm/scripts/rvm" 
+source ~/.zlogin
 source ~/.zsh_aliases

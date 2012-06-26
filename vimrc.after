@@ -5,6 +5,7 @@
     set autoread                    " Autoread file if changed outside VIM (Only when the file hasn't changed locally)
     set grepprg=ack               " Set Ack instead of grep
     set wildchar=<Tab> wildmenu wildmode=full " Enable the wild menu on tab in ex mode
+    let mapleader=","
 
     "==================== Colors ======================================
 
