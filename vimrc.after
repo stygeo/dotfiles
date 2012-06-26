@@ -1,4 +1,4 @@
-"<MainConfig> {
+"########################## Main config ################################
     syn on                          " Turn on syntax highlighting
     set number                      " Enable line number
     set hidden                      " Hide buffers
@@ -9,6 +9,7 @@
 
     "==================== Colors ======================================
 
+    set background=dark             " Set light barkground
     let g:solarized_termcolors=256  " Set solarized console to 256 colors
     set t_Co=256                    " Set vim to 256 colors
     colorscheme solarized           " Color schema
@@ -52,7 +53,10 @@
     set hlsearch                    " Highlight searches
 
     "==================== Misc ========================================
-"<KeyBindings> {
+
+    set splitright                  " VSplit on the right instead of the left side
+"########################## KEY BINDINGS ###################################
+
     "==================== Disables ====================================
 
     " Disable Ex mode
@@ -98,6 +102,14 @@
     " Yank line to OS Clipboard
     noremap <Leader>Y "*Y
 
+    " Open spec file for the current JavaScript file
+    function! OpenSpecFile()
+      let file = matchlist(expand("%:p"), 'app/assets/javascripts\([A-Za-z_/]\+\).js')
+
+      execute "vsp spec/javascripts/" . file[1] . 'Spec.js'
+    endfunction
+    noremap <Leader>- :call OpenSpecFile()<CR>
+
     "==================== Tools ======================================
     " This mapping uses <cword> to get the word under the cursor, and searches for it in the current directory and all subdirectorie.
     map <F9> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
@@ -117,9 +129,9 @@
       map <D-u> :Gist<CR>
       map <D-C> :ColorHEX<CR>
     endif
-"} </KeyBindings>
 
-"<Commands> {
+"########################### COMMANDS "####################################
+
     " This command based on VimTip483 uses <cword> to get the word under the cursor, but also uses % to limit the search to the current file only
     command GREP :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
     command Dark :set background=dark
@@ -132,6 +144,10 @@
           \ **/*<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
           \ <Bar> lw
           \ <C-Left><C-Left><C-Left>
+
+    " Scientific calculator
+    command! -nargs=+ Calc :py print <args>
+    py from cmath import *
 "} </Commands>
 
 if has("autocmd")
@@ -154,31 +170,10 @@ if has("gui_running")
   " Get rid of annoying balloon error popups about ri -f simple. I don't care
   " about hovers anyway
   autocmd FileType ruby,eruby set noballooneval
+  set guioptions=egmt
 else
 endif
 
-
 " Autosafe on focus lost, ignore warnings for new files
-au FocusLost * silent! wall
-
-" Signs
-sign define fixme text=!! linehl=Todo texthl=Error icon=/path/to/todo.xpm
-function! SignFixme(linenumber)
-  execute(":sign place ".a:linenumber." line=".a:linenumber." name=fixme file=".expand("%:p"))
-endfunction
-
-function! Mark()
-  execute(":call SignFixme(".line(".").")")
-endfunction
-
-map mm :call Mark()<CR>
-" TODO
-function! AutoFixme() range
-  for n in range(a:firstline, a:lastline)
-    if getline(n) =~ '\TODO'
-      echo "Found"
-      execute(":call SignFixme(".n.")")
-    endif
-  endfor
-endfunction
+"au FocusLost * silent! wall
 
