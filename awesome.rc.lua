@@ -14,7 +14,8 @@ require("vicious")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
+--beautiful.init("/home/stygeo/.config/awesome/themes/dust/theme.lua")
+beautiful.init("/home/stygeo/.config/awesome/themes/niceandclean/theme.lua")
 theme.wallpaper_cmd = { "awsetbg /home/stygeo/backgrounds/1324334635_iamjustageek_738246.jpeg" }
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"--"x-terminal-emulator"
@@ -115,6 +116,9 @@ vicious.register(cpuwidget, vicious.widgets.cpu,
                   return args[1]
                 end)
 
+kbdcfg = {}
+kbdcfg.cmd = "setxkbmap"
+
 -- Net widget
 netwidget = widget({type = "textbox"})
 vicious.register(netwidget, vicious.widgets.net, '<span color="#CC9393">${eth0 down_kb}</span> <span color="#7F9F7F">${eth0 up_kb}</span>', 3)
@@ -201,10 +205,10 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
         {
-            launcher,
             mytaglist[s],
+            layout = awful.widget.layout.horizontal.leftright,
+            launcher,
             mypromptbox[s],
-            layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
         mytextclock,
@@ -285,7 +289,7 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey }, "x",
               function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
+                  awful.prompt.run({ prompt = "lua: " },
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
