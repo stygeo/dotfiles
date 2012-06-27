@@ -18,7 +18,7 @@ require("vicious")
 beautiful.init("/home/stygeo/.config/awesome/themes/niceandclean/theme.lua")
 theme.wallpaper_cmd = { "awsetbg /home/stygeo/backgrounds/1324334635_iamjustageek_738246.jpeg" }
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"--"x-terminal-emulator"
+terminal = "xterm -u8"--"x-terminal-emulator"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -294,7 +294,8 @@ globalkeys = awful.util.table.join(
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
               end),
-    awful.key({ modkey }, "Print", function () awful.util.spawn("import -window root /home/stygeo/screenshots/Screen-" .. os.time() .. ".png") end)
+    --awful.key({ modkey }, "Print", function () awful.util.spawn("import -window root /home/stygeo/Dropbox/Public/ss/Screen-" .. os.time() .. ".png") end)
+    awful.key({ modkey }, "Print", function () awful.util.spawn("/home/stygeo/dotfiles/screenshot.sh " .. os.time()) end)
 )
 
 clientkeys = awful.util.table.join(
