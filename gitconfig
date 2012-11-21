@@ -3,6 +3,7 @@
 	email = stygeo@gmail.com
 [core]
 	editor = vim
+	excludesfile = /Users/stygeo/.gitignore
 [color]
 	ui = true
 [alias]
@@ -10,6 +11,7 @@
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   st = status
 	d = difftool
+  hist = log -p 
 [format]
 	pretty = format:%C(bold yellow)%H%Creset %C(bold cyan)%ci%Creset%n%C(bold green)%an%Creset %C(bold)%s%Creset%n
 [github]

@@ -128,6 +128,7 @@
     if has("gui_running")
       map <D-u> :Gist<CR>
       map <D-C> :ColorHEX<CR>
+      color molokai
     endif
 
 "########################### COMMANDS "####################################
@@ -151,7 +152,7 @@
 "} </Commands>
 
 if has("autocmd")
-  autocmd BufNewFile,BufRead Rakefile,Capfile,Gemfile,Guardfile,config.ru setfiletype ruby
+  autocmd BufNewFile,BufRead Rakefile,Capfile,Gemfile,Guardfile,config.ru,*.rd setfiletype ruby
   autocmd BufNewFile,BufRead *.styl setfiletype sass
   autocmd BufNewFile,BufRead *.jade setfiletype haml
   " Automatically delete fugitive buffers
