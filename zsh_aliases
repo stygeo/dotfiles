@@ -1,3 +1,4 @@
+alias vim="mvim -v"
 alias ss="rails s"
 alias prys="pry -r ./config/environment"
 alias less="less -R"
@@ -11,3 +12,4 @@ alias sshx="ssh -X -C -c blowfish-cbc,arcfour"
 alias rseed="export RAILS_ENV=development; export SEED=true ; rake db:drop && rake db:migrate && rake db:seed"
 alias vimrc="vim ~/.vimrc.after"
 alias ed="ed -p 'ed> '"
+alias bitcoind='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -server'

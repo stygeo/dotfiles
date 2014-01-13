@@ -13,6 +13,7 @@
     let g:solarized_termcolors=256  " Set solarized console to 256 colors
     set t_Co=256                    " Set vim to 256 colors
     colorscheme solarized           " Color schema
+    set colorcolumn=80              " Add a visual marker at 80th character
 
     "==================== Status line =================================
 
@@ -33,12 +34,19 @@
 
     set autoindent                  " Autoindent new lines
     set expandtab                   " Use spaces instead of tabs
+    hi SpecialKey ctermbg=none guibg=none
     set tabstop=2                   " Set tabs to 2 whitespaces
     set shiftwidth=2                " 2
     set softtabstop=2               " 2 space tabs
     set mouse=a                     " Enable mouse support
     set title                       " Set the title of the current file as xterm title
     set shiftround                  " When at 3 spaces indent to 4 instead of 5
+
+    " Special rules for Go
+    autocmd BufNewFile,BufRead *.go set tabstop=8
+    autocmd BufNewFile,BufRead *.go set noexpandtab
+    autocmd BufNewFile,BufRead *.go set shiftwidth=8                " 2
+    autocmd BufWritePre *.go Fmt
 
     "==================== History =====================================
 
@@ -128,7 +136,7 @@
     if has("gui_running")
       map <D-u> :Gist<CR>
       map <D-C> :ColorHEX<CR>
-      color molokai
+      " color moloai
     endif
 
 "########################### COMMANDS "####################################
@@ -137,7 +145,7 @@
     command GREP :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
     command Dark :set background=dark
     command Light :set background=light
-    command W :w
+    "command W :w
 
     " Finally, this cabbrev uses CTRL-R CTRL-W to get the word under the cursor, limiting the search to files of the same type using expand("%:e")
     cabbrev lvim
@@ -152,9 +160,11 @@
 "} </Commands>
 
 if has("autocmd")
-  autocmd BufNewFile,BufRead Rakefile,Capfile,Gemfile,Guardfile,config.ru,*.rd setfiletype ruby
+  autocmd BufNewFile,BufRead Rakefile,Capfile,Gemfile,Guardfile,config.ru,*.rd,*.god setfiletype ruby
   autocmd BufNewFile,BufRead *.styl setfiletype sass
   autocmd BufNewFile,BufRead *.jade setfiletype haml
+  au BufNewFile,BufRead *.ejs set filetype=html
+
   " Automatically delete fugitive buffers
   autocmd BufReadPost fugitive://* set bufhidden=delete
   autocmd BufNewFile,BufRead *.hamljs setfiletype haml
@@ -173,8 +183,13 @@ if has("gui_running")
   autocmd FileType ruby,eruby set noballooneval
   set guioptions=egmt
 else
+  "set cursorline!
+  "set cursorcolumn!
 endif
+
 
 " Autosafe on focus lost, ignore warnings for new files
 "au FocusLost * silent! wall
-
+let g:github_user = "stygeo"
+let g:github_token = "bf3d5844b5f7785721061bf6072b441f11add78d"
+let g:gist_clip_command = "pbcopy"
