@@ -1,11 +1,11 @@
 "########################## Main config ################################
     syn on                          " Turn on syntax highlighting
-    set number                      " Enable line number
     set hidden                      " Hide buffers
     set autoread                    " Autoread file if changed outside VIM (Only when the file hasn't changed locally)
     set grepprg=ack               " Set Ack instead of grep
     set wildchar=<Tab> wildmenu wildmode=full " Enable the wild menu on tab in ex mode
     let mapleader=","
+    set number
 
     "==================== Colors ======================================
 
@@ -13,7 +13,7 @@
     let g:solarized_termcolors=256  " Set solarized console to 256 colors
     set t_Co=256                    " Set vim to 256 colors
     colorscheme solarized           " Color schema
-    set colorcolumn=80              " Add a visual marker at 80th character
+    set list!                       " Unset list
 
     "==================== Status line =================================
 
@@ -34,19 +34,19 @@
 
     set autoindent                  " Autoindent new lines
     set expandtab                   " Use spaces instead of tabs
-    hi SpecialKey ctermbg=none guibg=none
-    set tabstop=2                   " Set tabs to 2 whitespaces
-    set shiftwidth=2                " 2
-    set softtabstop=2               " 2 space tabs
+    set tabstop=4                   " Set tabs to 2 whitespaces
+    set shiftwidth=4                " 2
+    "set softtabstop=2               " 2 space tabs
     set mouse=a                     " Enable mouse support
     set title                       " Set the title of the current file as xterm title
     set shiftround                  " When at 3 spaces indent to 4 instead of 5
+    set textwidth=0 wrapmargin=0
 
     " Special rules for Go
     autocmd BufNewFile,BufRead *.go set tabstop=8
     autocmd BufNewFile,BufRead *.go set noexpandtab
-    autocmd BufNewFile,BufRead *.go set shiftwidth=8                " 2
-    autocmd BufWritePre *.go Fmt
+    autocmd BufNewFile,BufRead *.go set shiftwidth=8
+    "autocmd FileType go autocmd BufWritePre <buffer> silent Fmt
 
     "==================== History =====================================
 
@@ -109,6 +109,9 @@
     noremap <Leader>y "*y
     " Yank line to OS Clipboard
     noremap <Leader>Y "*Y
+    " 
+    noremap <C-d> :TagbarToggle<CR>
+
 
     " Open spec file for the current JavaScript file
     function! OpenSpecFile()
@@ -163,11 +166,15 @@ if has("autocmd")
   autocmd BufNewFile,BufRead Rakefile,Capfile,Gemfile,Guardfile,config.ru,*.rd,*.god setfiletype ruby
   autocmd BufNewFile,BufRead *.styl setfiletype sass
   autocmd BufNewFile,BufRead *.jade setfiletype haml
+  autocmd BufNewFile,BufRead *.mu setfiletype go
   au BufNewFile,BufRead *.ejs set filetype=html
 
   " Automatically delete fugitive buffers
   autocmd BufReadPost fugitive://* set bufhidden=delete
   autocmd BufNewFile,BufRead *.hamljs setfiletype haml
+
+  autocmd InsertEnter * set number
+  autocmd InsertLeave * set relativenumber
 
   autocmd User fugitive
     \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
@@ -182,6 +189,7 @@ if has("gui_running")
   " about hovers anyway
   autocmd FileType ruby,eruby set noballooneval
   set guioptions=egmt
+  set guifont="Source Code Pro for Powerline"
 else
   "set cursorline!
   "set cursorcolumn!
@@ -190,6 +198,6 @@ endif
 
 " Autosafe on focus lost, ignore warnings for new files
 "au FocusLost * silent! wall
-let g:github_user = "stygeo"
-let g:github_token = "bf3d5844b5f7785721061bf6072b441f11add78d"
+let g:github_user = "obscuren"
+let g:github_token = "c44b908c49e745fe9022d43461f21fd1ccf61af4"
 let g:gist_clip_command = "pbcopy"

@@ -1,25 +1,25 @@
 [user]
-	name = Jeffrey Wilcke
-	email = stygeo@gmail.com
+    name = Jeffrey Wilcke
+    email = geffobscura@gmail.com
 [core]
-	editor = vim
-	excludesfile = /Users/stygeo/.gitignore
+    editor = vim
+    excludesfile = /Users/stygeo/.gitignore
 [color]
-	ui = true
+    ui = true
 [alias]
-	last = cat-file commit HEAD
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-  st = status
-	d = difftool
-  hist = log -p 
+    last = cat-file commit HEAD
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    st = status
+    d = difftool
+    hist = log -p 
 [format]
-	pretty = format:%C(bold yellow)%H%Creset %C(bold cyan)%ci%Creset%n%C(bold green)%an%Creset %C(bold)%s%Creset%n
+    pretty = format:%C(bold yellow)%H%Creset %C(bold cyan)%ci%Creset%n%C(bold green)%an%Creset %C(bold)%s%Creset%n
 [github]
-  username = stygeo
-	user = stygeo
+    username = obscuren
+    user = obscuren
 [diff]
-	tool = vimdiff
+    tool = vimdiff
 [difftool]
-	prompt = false
+    prompt = false
 [push]
-	default = matching
+    default = matching

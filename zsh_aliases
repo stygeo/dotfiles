@@ -1,4 +1,3 @@
-alias vim="mvim -v"
 alias ss="rails s"
 alias prys="pry -r ./config/environment"
 alias less="less -R"
@@ -13,3 +12,4 @@ alias rseed="export RAILS_ENV=development; export SEED=true ; rake db:drop && ra
 alias vimrc="vim ~/.vimrc.after"
 alias ed="ed -p 'ed> '"
 alias bitcoind='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -server'
+alias eth='cd $GOPATH/src/github.com/ethereum'
