@@ -12,6 +12,7 @@
     st = status
     d = difftool
     hist = log -p 
+	undo-commit = reset --soft HEAD^
 [format]
     pretty = format:%C(bold yellow)%H%Creset %C(bold cyan)%ci%Creset%n%C(bold green)%an%Creset %C(bold)%s%Creset%n
 [github]

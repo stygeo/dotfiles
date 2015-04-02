@@ -1,11 +1,41 @@
+" Set the shell something meaningfull
+set shell=/bin/zsh
+" Enable plugins
+filetype plugin indent on
+" Load plugins before config
+execute pathogen#infect()
+
+"########################## Plugin settings ############################
+let g:go_bin_path = "/home/jeffrey/go"
+let g:python_host_prog = "/usr/local/bin/python"
+let g:go_fmt_command = "goimports" 
+let g:airline_powerline_fonts = 1
+" When opening a file with Ack, open in the middle of the screen
+let g:ack_mappings = { "o": "<CR>zz" }
+let g:ackhighlight = 1
+let g:ackpreview = 1
+
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 "########################## Main config ################################
+    set nocompatible                " Use vim, no vi defaults
+    set backspace=indent,eol,start  " backspace through everything
+    set enc=utf-8
+    set fileencoding=utf-8
     syn on                          " Turn on syntax highlighting
     set hidden                      " Hide buffers
     set autoread                    " Autoread file if changed outside VIM (Only when the file hasn't changed locally)
     set grepprg=ack               " Set Ack instead of grep
     set wildchar=<Tab> wildmenu wildmode=full " Enable the wild menu on tab in ex mode
     let mapleader=","
-    set number
+    set number                      " show line numbers
+    set hlsearch                    " highlight searches
+    set incsearch                   " incremental searches
+    set ignorecase                  " case insensitive
+    set smartcase                   " .... unless they contain at least one capital letter
+
+    set completeopt=menu,preview
 
     "==================== Colors ======================================
 
@@ -14,7 +44,7 @@
     set t_Co=256                    " Set vim to 256 colors
     colorscheme solarized           " Color schema
     "colorscheme molokai
-    set list!                       " Unset list
+    "set list!                       " Unset list
 
     "==================== Status line =================================
 
@@ -23,13 +53,13 @@
 
     "===================== Spelling ===================================
 
-    set spell                       " Enable spell checking
-    set spelllang=en                " Set spelling to English
+    "set spell                       " Enable spell checking
+    "set spelllang=en                " Set spelling to English
 
     "===================== Cursor =====================================
 
-    "set cursorcolumn                " Column marker
-    "set cursorline                  " Set cursor
+    set cursorcolumn                " Column marker
+    set cursorline                  " Set cursor
 
     "===================== Indentation ================================
 
@@ -134,6 +164,8 @@
     inoremap jj <ESC>
     " Remove trailing spaces
     nnoremap <leader>W %s/\s\+$//<cr>:let @/=''<cr>
+    " Pasting toggle
+    set pastetoggle=<F4>
 
     " ================== GUI ONLY =====================================
 
@@ -159,8 +191,8 @@
           \ <C-Left><C-Left><C-Left>
 
     " Scientific calculator
-    command! -nargs=+ Calc :py print <args>
-    py from cmath import *
+    "command! -nargs=+ Calc :py print <args>
+    "py from cmath import *
 "} </Commands>
 
 if has("autocmd")
