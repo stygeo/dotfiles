@@ -165,7 +165,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
     " Remove trailing spaces
     nnoremap <leader>W %s/\s\+$//<cr>:let @/=''<cr>
     " Pasting toggle
-    set pastetoggle=<F4>
+    set pastetoggle=<F2>
 
     " ================== GUI ONLY =====================================
 
